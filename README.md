@@ -9,4 +9,13 @@ nest new api
 cd api
 
 npm i @nestjs/typeorm typeorm pg @nestjs/config
+``` 
+
+.env file postgres credentials
+```bash
+POSTGRES_HOST=localhost
+POSTGRES_PORT=5432
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=changeme
+POSTGRES_DATABASE=postgres
 ```
