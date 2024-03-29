@@ -30,3 +30,17 @@ nest g s feed/serbices/feed --flat --no-spec
 nest g co feed/controllers/feed --flat --no-spec
 ``` 
 
+### Frontend Angular with Ionic
+https://ionicframework.com/ 
+
+```bash
+npm i -g @ionic/cli
+ionic start
+```
+choose Angular 
+
+name linkedin
+
+blank project
+
+Integrate your new app with Capacitor to target native Ios and Android? - Yes
