@@ -55,4 +55,11 @@ Integrate your new app with Capacitor to target native Ios and Android? - Yes
 cd linkedin
 ionic serve
 ``` 
-http://localhost:8100
+http://localhost:8100 
+
+- generate component
+```bash
+ionic generate component home/components/header 
+
+ionic generate component home/components/header/popover
+```
