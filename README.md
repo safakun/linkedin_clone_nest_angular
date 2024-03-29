@@ -18,4 +18,15 @@ POSTGRES_PORT=5432
 POSTGRES_USER=postgres
 POSTGRES_PASSWORD=changeme
 POSTGRES_DATABASE=postgres
-```
+``` 
+
+http://localhost:3000/api 
+
+- adding modules
+
+```bash
+nest g mo feed
+nest g s feed/serbices/feed --flat --no-spec
+nest g co feed/controllers/feed --flat --no-spec
+``` 
+
