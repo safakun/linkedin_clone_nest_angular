@@ -30,6 +30,12 @@ nest g s feed/serbices/feed --flat --no-spec
 nest g co feed/controllers/feed --flat --no-spec
 ``` 
 
+```bash
+docker compose up
+npm run start:dev
+```
+
+
 ### Frontend Angular with Ionic
 https://ionicframework.com/ 
 
@@ -43,4 +49,10 @@ name linkedin
 
 blank project
 
-Integrate your new app with Capacitor to target native Ios and Android? - Yes
+Integrate your new app with Capacitor to target native Ios and Android? - Yes 
+
+```bash
+cd linkedin
+ionic serve
+``` 
+http://localhost:8100
