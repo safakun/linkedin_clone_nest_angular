@@ -24,6 +24,10 @@ ion-col {
     cursor: pointer;
 }
 
+ion-col:hover {
+    opacity: 0.8;
+}
+
 ion-col div {
     font-size: 12px;
     font-weight: 400;
@@ -58,4 +62,5 @@ ion-avatar {
 
 .profiledown {
     font-size: 16px;
-}
+} 
+
