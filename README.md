@@ -62,4 +62,13 @@ http://localhost:8100
 ionic generate component home/components/header 
 
 ionic generate component home/components/header/popover
+
+ionic generate component home/components/profile-summary 
+
+ionic generate component home/components/start-post
+
+ionic generate component home/components/advertising
+
+ionic generate component home/components/start-post/modal
+
 ```
