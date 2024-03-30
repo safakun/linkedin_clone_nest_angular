@@ -45,3 +45,12 @@ ion-card-header {
         box-shadow: inset 0px 0px 0px 10px var(--ion-color-primary-contrast);
     }
 }
+
+ion-card-content div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.connections {
+    margin-top: 8px;
+}
