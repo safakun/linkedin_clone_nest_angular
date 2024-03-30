@@ -11,4 +11,10 @@ export class PopoverComponent  implements OnInit {
 
   ngOnInit() {}
 
+  onSignOut() {
+  console.log(1, "OnsignOut called");
+  }
+
 }
+
+
