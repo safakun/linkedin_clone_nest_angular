@@ -71,4 +71,7 @@ ionic generate component home/components/advertising
 
 ionic generate component home/components/start-post/modal
 
-```
+``` 
+
+in tsconfig.json add
+"strictPropertyInitialization": false
