@@ -19,11 +19,46 @@
         </div>
         <ion-button size="small" shape="round" fill="outline" color="medium">
           <ion-icon color="dark" name="globe-outline"></ion-icon>
-          <ion-text>Anyone</ion-text>
+          <ion-text class="view-status">Anyone</ion-text>
           <ion-icon color="dark" name="caret-down-outline"></ion-icon>
         </ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>
+  <form #form="ngForm" (ngSubmit)="onPost()" class="ion-padding">
+    <ion-textarea
+     rows="5" 
+     placeholder="What do you want to talk about?" 
+     type="text" 
+     name="body" 
+     ngModel
+     required></ion-textarea>
+    <ion-button fill="clear">Add hashtag</ion-button>
+    <div class="action-items">
+      <div>
+        <ion-button size="small" shape="round" color="dark" fill="clear">
+          <ion-icon class="ion-padding-none" slot="icon-only" name="add"></ion-icon>
+        </ion-button>
+
+        <ion-button size="small" shape="round" color="dark" fill="clear">
+          <ion-icon class="ion-padding-none" slot="icon-only" name="image-outline"></ion-icon>
+        </ion-button>
+
+        <ion-button size="small" shape="round" color="dark" fill="clear">
+          <ion-icon class="ion-padding-none" slot="icon-only" name="play-sharp"></ion-icon>
+        </ion-button>
+
+        <ion-button size="small" shape="round" color="dark" fill="clear">
+          <ion-icon class="ion-padding-none" slot="icon-only" name="calendar-outline"></ion-icon>
+        </ion-button>
+
+        <ion-button size="small" shape="round" color="dark" fill="clear">
+          <ion-icon class="ion-padding-none" name="chatbox-ellipses-outline"></ion-icon>
+          <ion-text class="view-status">Anyone</ion-text>
+        </ion-button>
+        <ion-button [disabled]="!form.valid" type="submit" class="ion-margin">Post</ion-button>
+      </div>
+    </div>
+  </form>
 
 </div>
