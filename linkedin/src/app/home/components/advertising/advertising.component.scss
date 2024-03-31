@@ -22,3 +22,15 @@ ion-card-header {
         margin-top: 0;
     }
 }
+
+ion-card-content {
+    ion-text h6:not(.first-course) {
+        margin-top: 8px;
+    }
+    h6 {
+        font-weight: 500;
+    }
+    p {
+        margin-left: 16px;
+    }
+}
