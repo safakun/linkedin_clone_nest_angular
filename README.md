@@ -74,4 +74,7 @@ ionic generate component home/components/start-post/modal
 ``` 
 
 in tsconfig.json add
-"strictPropertyInitialization": false
+"strictPropertyInitialization": false 
+
+- unlimited posts selection uRL
+GET http://localhost:3000/api/feed?take=4&skip=2
