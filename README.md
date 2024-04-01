@@ -71,6 +71,10 @@ ionic generate component home/components/advertising
 
 ionic generate component home/components/start-post/modal
 
+ionic generate component home/components/all-posts
+
+ionic generate service home/services/post
+
 ``` 
 
 in tsconfig.json add
