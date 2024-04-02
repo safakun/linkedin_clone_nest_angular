@@ -75,6 +75,8 @@ ionic generate component home/components/all-posts
 
 ionic generate service home/services/post
 
+ionic generate component home/components/tabs
+
 ``` 
 
 in tsconfig.json add
