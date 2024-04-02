@@ -1,7 +1,7 @@
 <div class="all-posts-container">
 <ion-content>
   <ion-list>
-    <ion-card>
+    <ion-card *ngFor="let post of allLoadedPosts">
     <ion-grid>
       <ion-row class="ion-align-items-center ion-justify-content-center">
         <ion-col size="auto" class="ion-padding">
@@ -58,4 +58,5 @@
   </ion-infinite-scroll>
 
 </ion-content>
+<div class="hide-scroll"></div>
 </div>
