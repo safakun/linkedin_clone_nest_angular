@@ -77,6 +77,8 @@ ionic generate service home/services/post
 
 ionic generate component home/components/tabs
 
+
+ionic generate page auth
 ``` 
 
 in tsconfig.json add
