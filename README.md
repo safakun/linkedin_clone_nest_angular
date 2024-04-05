@@ -18,6 +18,7 @@ POSTGRES_PORT=5432
 POSTGRES_USER=postgres
 POSTGRES_PASSWORD=changeme
 POSTGRES_DATABASE=postgres
+JWT_SECRET=jwtSecret_phrase
 ``` 
 
 http://localhost:3000/api 
@@ -85,4 +86,20 @@ in tsconfig.json add
 "strictPropertyInitialization": false 
 
 - unlimited posts selection uRL
-GET http://localhost:3000/api/feed?take=4&skip=2
+GET http://localhost:3000/api/feed?take=4&skip=2 
+
+- Installing authentifivation on Nest
+```bash
+npm i passport passport-jwt @nestjs/passport @nestjs/jwt bcrypt
+
+npm i -D @types/passport-jwt @types/bcrypt
+``` 
+
+- generate auth module
+```bash
+nest g mo auth 
+
+nest g s auth/services/auth --no-spec --flat
+
+nest g co auth/controllers/auth --no-spec --flat
+```
