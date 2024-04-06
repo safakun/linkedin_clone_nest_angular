@@ -6,11 +6,14 @@ import { User } from '../models/user.interface';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserEntity } from '../models/user.entity';
 import { Repository } from 'typeorm';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthService {
 
-    constructor(@InjectRepository(UserEntity) private readonly userRepository: Repository<UserEntity> ) {
+    constructor(@InjectRepository(UserEntity) private readonly userRepository: Repository<UserEntity>,
+    private jwtService: JwtService
+    ) {
 
     }
 
@@ -56,7 +59,15 @@ export class AuthService {
         )
     }
 
-    login(user: User): Observable<{token: string}> {
-        return
+    login(user: User): Observable<string> {
+        const { email, password } = user;
+        return this.validateUser(email, password).pipe(
+            switchMap((user: User) => {
+                if (user) {
+                    // Reate JWT - credentials
+                    return from(this.jwtService.signAsync({ user }))
+                }
+            })
+        )
     }
 }
