@@ -37,4 +37,26 @@ export class AuthService {
             })
         )
     }
+
+    validateUser(email: string, password: string): Observable<User> {
+        return from(this.userRepository.findOne({
+            where: {email},
+            select: ['id', 'firstName', 'lastName', 'email', 'password', 'role']
+         })).pipe(
+            switchMap((user: User | any) => 
+            from(bcrypt.compare(password, user.password)).pipe(
+                map((isValidPassword: boolean) => {
+                    if (isValidPassword) {
+                        delete user.password;
+                        return user;
+                    }
+                })
+            )
+            )
+        )
+    }
+
+    login(user: User): Observable<{token: string}> {
+        return
+    }
 }

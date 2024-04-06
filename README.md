@@ -102,4 +102,6 @@ nest g mo auth
 nest g s auth/services/auth --no-spec --flat
 
 nest g co auth/controllers/auth --no-spec --flat
+
+nest g gu auth/guards/jwt --no-spec --flat
 ```
