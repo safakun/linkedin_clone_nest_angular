@@ -117,5 +117,8 @@ ionic g guard auth/guards/auth --skip-tests
 # On client side angular
 npm i jwt-decode
 
+# npm install --save @capacitor/core @capacitor/cli
+
+npm i @capacitor/preferences
 ``` 
 use CanLoad while generating such guard 
