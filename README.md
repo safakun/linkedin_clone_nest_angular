@@ -104,4 +104,9 @@ nest g s auth/services/auth --no-spec --flat
 nest g co auth/controllers/auth --no-spec --flat
 
 nest g gu auth/guards/jwt --no-spec --flat
-```
+
+nest g d auth/decorators/roles --flat --no-spec 
+
+nest g gu auth/guards/roles --flat --no-spec
+``` 
+
