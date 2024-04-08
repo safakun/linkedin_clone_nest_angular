@@ -9,6 +9,8 @@ import { environment } from 'src/environments/environment';
 import { Preferences } from '@capacitor/preferences';
 import { UserResponse } from '../models/userResponse.model';
 
+import { jwtDecode } from 'jwt-decode';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -57,7 +59,7 @@ export class AuthService {
           key: 'token',
           value: response.token,
         });
-        const decodedToken: UserResponse = jwt_decode(response.token);
+        const decodedToken: UserResponse = jwtDecode(response.token);
         this.user$.next(decodedToken.user);
       })
       );
@@ -72,7 +74,7 @@ export class AuthService {
       map((data: { value: string }) => {
         if (!data || !data.value) return null;
 
-        const decodedToken: UserResponse = jwt_decode(data.value);
+        const decodedToken: UserResponse = jwtDecode(data.value);
         const jwtExpirationInMsSinceUnixEpoch = decodedToken.exp * 1000;
         const isExpired =
           new Date() > new Date(jwtExpirationInMsSinceUnixEpoch);
@@ -88,6 +90,7 @@ export class AuthService {
 
 
 }
+
 function jwt_decode(token: string): UserResponse {
   throw new Error('Function not implemented.');
 }

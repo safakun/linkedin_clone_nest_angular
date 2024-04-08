@@ -24,6 +24,7 @@ export class AuthPage implements OnInit {
     if (!email || !password) return;
 
     if (this.submissionType === 'login') {
+      console.log(1, "loggin in ", email, password);
       return this.authService.login(email, password).subscribe(() => {
         this.router.navigateByUrl('/home');
       });

@@ -28,6 +28,8 @@ export class AuthGuard implements CanLoad {
         if (!isUserLoggedIn) {
           this.router.navigateByUrl('/auth');
         }
+      //  this.router.navigateByUrl('/auth');
+        console.log(3, isUserLoggedIn)
       })
     );
   }
