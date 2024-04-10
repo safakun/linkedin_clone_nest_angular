@@ -2,7 +2,7 @@ import { FeedPost } from "src/feed/models/post.interface";
 import { Role } from "./role.enum";
 
 export interface User {
-    if?: number;
+    id?: number;
     firstName?: string;
     lastName?: string;
     email?: string;

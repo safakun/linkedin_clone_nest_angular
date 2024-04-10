@@ -122,3 +122,8 @@ npm i jwt-decode
 npm i @capacitor/preferences
 ``` 
 use CanLoad while generating such guard 
+
+
+```bash
+nest g gu feed/guards/is-creator --flat --no-spec 
+```

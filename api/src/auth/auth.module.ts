@@ -19,6 +19,7 @@ import { RolesGuard } from './guards/roles.guard';
     TypeOrmModule.forFeature([UserEntity])
   ],
   providers: [AuthService, JwtGuard, JwtStrategy, RolesGuard],
-  controllers: [AuthController]
+  controllers: [AuthController],
+  exports: [AuthService],
 })
 export class AuthModule {}
