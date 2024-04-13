@@ -126,4 +126,6 @@ use CanLoad while generating such guard
 
 ```bash
 nest g gu feed/guards/is-creator --flat --no-spec 
+
+ionic g s auth/services/auth-interceptor --skip-tests
 ```
