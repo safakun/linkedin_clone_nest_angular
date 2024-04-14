@@ -1,3 +1,5 @@
+import { Post } from "src/app/home/models/Post";
+
 export type Role = 'admin' | 'premiun' | 'user';
 
 export interface User {
@@ -6,4 +8,5 @@ export interface User {
     lastName: string;
     email: string;
     role: Role;
+    posts: Post[];
 }
