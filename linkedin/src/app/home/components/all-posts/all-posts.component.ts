@@ -27,6 +27,9 @@ export class AllPostsComponent  implements OnInit {
   ngOnChanges(changes: SimpleChanges) {
     const postBody = changes.postBody.currentValue;
     if (!postBody) return;
+    this.postService.createPost(postBody).subscribe((post: Post) => {
+      this.allLoadedPosts.unshift(post);
+    })
   }
 
   getPosts(isInitialLoad: boolean, event: any) {
