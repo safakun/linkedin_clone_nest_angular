@@ -1,9 +1,10 @@
 import { Component, Input, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { PostService } from '../../services/post.service';
-import { IonInfiniteScroll } from '@ionic/angular';
+import { IonInfiniteScroll, ModalController } from '@ionic/angular';
 import { Post } from '../../models/Post';
 import { BehaviorSubject, take } from 'rxjs';
 import { AuthService } from 'src/app/auth/services/auth.service';
+import { ModalComponent } from '../start-post/modal/modal.component';
 
 @Component({
   selector: 'app-all-posts',
@@ -22,7 +23,11 @@ export class AllPostsComponent  implements OnInit {
 
   userId$ = new BehaviorSubject<number>(null);
 
-  constructor(private postService: PostService, private authService: AuthService) { }
+  constructor(
+    private postService: PostService, 
+    private authService: AuthService,
+    public modalController: ModalController
+  ) { }
 
   ngOnInit() {
     this.getPosts(false, '');
@@ -61,8 +66,27 @@ export class AllPostsComponent  implements OnInit {
     this.getPosts(true, event);
   }
 
-  presentUpdateModal(postId: number) {
+  async presentUpdateModal(postId: number) {
     console.log("IDIT POST", postId);
+    
+      const modal = await this.modalController.create({
+        component: ModalComponent,
+        cssClass: 'my-custom-class2',
+        componentProps: {
+          postId,
+        }
+      })
+      await modal.present();
+      const { data, role } = await modal.onDidDismiss();
+      if (!data) return;
+
+      const newPostBody = data.post.body;
+      this.postService.updatePost(postId, newPostBody).subscribe(() => {
+        const postIndex = this.allLoadedPosts.findIndex((post: Post) => post.id === postId);
+        this.allLoadedPosts[postIndex].body = newPostBody;
+      })
+      // console.log('role: ', role, 'data: ', data)
+ 
   }
 
   deletePost(postId: number) {
