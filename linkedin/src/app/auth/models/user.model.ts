@@ -3,7 +3,7 @@ import { Post } from "src/app/home/models/Post";
 export type Role = 'admin' | 'premiun' | 'user';
 
 export interface User {
-    id: string;
+    id: number;
     firstName: string;
     lastName: string;
     email: string;

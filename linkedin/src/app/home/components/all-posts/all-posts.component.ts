@@ -2,6 +2,8 @@ import { Component, Input, OnInit, SimpleChanges, ViewChild } from '@angular/cor
 import { PostService } from '../../services/post.service';
 import { IonInfiniteScroll } from '@ionic/angular';
 import { Post } from '../../models/Post';
+import { BehaviorSubject, take } from 'rxjs';
+import { AuthService } from 'src/app/auth/services/auth.service';
 
 @Component({
   selector: 'app-all-posts',
@@ -18,10 +20,16 @@ export class AllPostsComponent  implements OnInit {
   numberOfPosts = 5;
   skipPosts = 0;
 
-  constructor(private postService: PostService) { }
+  userId$ = new BehaviorSubject<number>(null);
+
+  constructor(private postService: PostService, private authService: AuthService) { }
 
   ngOnInit() {
     this.getPosts(false, '');
+
+    this.authService.userId.pipe(take(1)).subscribe((userId: number) => {
+      this.userId$.next(userId);
+    })
   }
 
   ngOnChanges(changes: SimpleChanges) {

@@ -18,6 +18,11 @@
             <ion-icon color="dark" name="globe-outline"></ion-icon>
           </div>
         </ion-col>
+
+        <ion-col class="update_delete_column ion-text-right" *ngIf="(userId$ | async) === post.author.id">
+          <ion-icon color="dark" class="create_delete" name="create-outline"></ion-icon>
+          <ion-icon color="danger" class="create_delete"  name="trash-outline"></ion-icon>
+        </ion-col>
       </ion-row>
       <p class="post-body">
         {{ post.body }}
