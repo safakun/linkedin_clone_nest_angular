@@ -61,4 +61,17 @@ export class AllPostsComponent  implements OnInit {
     this.getPosts(true, event);
   }
 
+  presentUpdateModal(postId: number) {
+    console.log("IDIT POST", postId);
+  }
+
+  deletePost(postId: number) {
+   // console.log("DELETE", postId);
+   this.postService.deletePost(postId).subscribe(() => {
+      this.allLoadedPosts = this.allLoadedPosts.filter(
+        (post: Post) => post.id !== postId
+      )
+   })
+  }
+
 }
