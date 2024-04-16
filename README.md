@@ -130,3 +130,12 @@ nest g gu feed/guards/is-creator --flat --no-spec
 ionic g s auth/services/auth-interceptor --skip-tests
 ``` 
 
+Image upload on nest
+
+```bash
+npm i -D @types/multer 
+npm i uuid file-type
+
+
+nest g s auth/services/user --flat --no-spec
+```
