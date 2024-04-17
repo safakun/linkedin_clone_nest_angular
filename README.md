@@ -138,4 +138,6 @@ npm i uuid file-type
 
 
 nest g s auth/services/user --flat --no-spec
+
+nest g co auth/controllers/user --flat --no-spec 
 ```
