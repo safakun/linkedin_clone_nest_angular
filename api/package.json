@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "",
   "author": "",
+  "type": "commonjs",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
@@ -28,14 +29,14 @@
     "@nestjs/platform-express": "^10.0.0",
     "@nestjs/typeorm": "^10.0.2",
     "bcrypt": "^5.1.1",
-    "file-type": "^19.0.0",
     "passport": "^0.7.0",
     "passport-jwt": "^4.0.1",
     "pg": "^8.11.3",
     "reflect-metadata": "^0.2.0",
     "rxjs": "^7.8.1",
     "typeorm": "^0.3.20",
-    "uuid": "^9.0.1"
+    "uuid": "^9.0.1",
+    "file-type": "^16.5.3"
   },
   "devDependencies": {
     "@nestjs/cli": "^10.0.0",
