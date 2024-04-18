@@ -1,7 +1,7 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, Query, UseGuards, Request } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Res, Param, Post, Put, Query, UseGuards, Request } from '@nestjs/common';
 import { FeedService } from '../services/feed.service';
 import { FeedPost } from '../models/post.interface';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { DeleteResult, UpdateResult } from 'typeorm';
 import { JwtGuard } from 'src/auth/guards/jwt.guard';
 import { Roles } from 'src/auth/decorators/roles.decorator';
@@ -47,6 +47,14 @@ export class FeedController {
     @Delete(':id')
     delete(@Param('id') id: number): Observable<DeleteResult> {
         return this.feedService.deletePost(id);
+    }
+
+    @Get('image/:fileName')
+    findImageByName(@Param('fileName') fileName: string, @Res() res) {
+        if (!fileName || ['null', '[null]'].includes(fileName)) return;
+        
+        return of(res.sendFile(fileName, { root: './images' }));
+
     }
 
 }
