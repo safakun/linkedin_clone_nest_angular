@@ -1,19 +1,32 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { ModalComponent } from './modal/modal.component';
+import { Subscription } from 'rxjs';
+import { AuthService } from 'src/app/auth/services/auth.service';
 
 @Component({
   selector: 'app-start-post',
   templateUrl: './start-post.component.html',
   styleUrls: ['./start-post.component.scss'],
 })
-export class StartPostComponent  implements OnInit {
+export class StartPostComponent  implements OnInit, OnDestroy {
 
   @Output() create: EventEmitter<any> = new EventEmitter();
 
-  constructor(public modalController: ModalController) { }
+  userFullImagePath: string;
+  private userImagePathSubscription: Subscription;
 
-  ngOnInit() {}
+  constructor(
+    public modalController: ModalController,
+    private authService: AuthService
+  ) { }
+
+  ngOnInit() {
+    this.userImagePathSubscription = this.authService.userFullImagePath.subscribe((fullImagepath: string) => {
+     
+      this.userFullImagePath = fullImagepath;
+    })
+  }
 
   async presentModal() {
     console.log("Create POST");
@@ -26,6 +39,11 @@ export class StartPostComponent  implements OnInit {
     if (!data) return;
     this.create.emit(data.post.body);
     console.log('role: ', role, 'data: ', data)
+  }
+
+
+  ngOnDestroy() {
+      this.userImagePathSubscription.unsubscribe();
   }
 
 }

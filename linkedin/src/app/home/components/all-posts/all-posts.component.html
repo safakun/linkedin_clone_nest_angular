@@ -6,7 +6,7 @@
       <ion-row class="ion-align-items-center ion-justify-content-center">
         <ion-col size="auto" class="ion-padding">
           <ion-avatar>
-            <ion-img src="../../../../assets/profile-pic.jpg"></ion-img>
+            <ion-img *ngIf="userFullImagePath" [src]="userFullImagePath"></ion-img>
           </ion-avatar>
         </ion-col>
         <ion-col>

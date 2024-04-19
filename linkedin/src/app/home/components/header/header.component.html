@@ -46,7 +46,7 @@
           (click)="presentPopover($event)"
           size="auto">
             <ion-avatar>
-              <ion-img src="../../../../assets/profile-pic.jpg"></ion-img>
+              <ion-img *ngIf="userFullImagePath" [src]="userFullImagePath"></ion-img>
             </ion-avatar>
             <div class="me">Me
               <ion-icon class="profiledown" name="caret-down-outline"></ion-icon>

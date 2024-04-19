@@ -1,8 +1,8 @@
-import { Component, Input, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { PostService } from '../../services/post.service';
 import { IonInfiniteScroll, ModalController } from '@ionic/angular';
 import { Post } from '../../models/Post';
-import { BehaviorSubject, take } from 'rxjs';
+import { BehaviorSubject, Subscription, take } from 'rxjs';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { ModalComponent } from '../start-post/modal/modal.component';
 
@@ -11,10 +11,13 @@ import { ModalComponent } from '../start-post/modal/modal.component';
   templateUrl: './all-posts.component.html',
   styleUrls: ['./all-posts.component.scss'],
 })
-export class AllPostsComponent  implements OnInit {
+export class AllPostsComponent  implements OnInit, OnDestroy {
   @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
 
   @Input() postBody: string;
+
+  userFullImagePath: string;
+  private userImagePathSubscription: Subscription;
 
   queryParams: string;
   allLoadedPosts: Post[] = [];
@@ -30,6 +33,11 @@ export class AllPostsComponent  implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.userImagePathSubscription = this.authService.userFullImagePath.subscribe((fullImagepath: string) => {
+     
+      this.userFullImagePath = fullImagepath;
+    })
+
     this.getPosts(false, '');
 
     this.authService.userId.pipe(take(1)).subscribe((userId: number) => {
@@ -98,4 +106,7 @@ export class AllPostsComponent  implements OnInit {
    })
   }
 
+  ngOnDestroy(): void {
+    this.userImagePathSubscription.unsubscribe();
+  }
 }

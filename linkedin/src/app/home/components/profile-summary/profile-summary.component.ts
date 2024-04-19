@@ -29,7 +29,7 @@ export class ProfileSummaryComponent  implements OnInit, OnDestroy {
   validMimeTypes: validMimeType[] = ['image/png' , 'image/jpg' , 'image/jpeg'];
 
   userFullImagePath: string;
-  private userSubscription: Subscription;
+  private userImagePathSubscription: Subscription;
 
   fullName$ = new BehaviorSubject<string>(null);
   fullName = '';
@@ -57,8 +57,8 @@ export class ProfileSummaryComponent  implements OnInit, OnDestroy {
       this.fullName$.next(fullName);
     })
 
-    this.userSubscription = this.authService.userFullImagePath.subscribe((fullImagepath: string) => {
-      console.log(1, fullImagepath);
+    this.userImagePathSubscription = this.authService.userFullImagePath.subscribe((fullImagepath: string) => {
+     
       this.userFullImagePath = fullImagepath;
     })
   }
@@ -125,6 +125,6 @@ export class ProfileSummaryComponent  implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-      this.userSubscription.unsubscribe();
+      this.userImagePathSubscription.unsubscribe();
   }
 }
