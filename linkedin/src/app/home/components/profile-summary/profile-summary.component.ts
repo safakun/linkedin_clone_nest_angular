@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { take } from 'rxjs/operators';
+import { from, of } from 'rxjs';
+import { switchMap, take } from 'rxjs/operators';
 import { Role } from 'src/app/auth/models/user.model';
 import { AuthService } from 'src/app/auth/services/auth.service';
+import { FileTypeResult, fromBuffer } from 'file-type';
 
 
 type validFileExtension = 'png' | 'jpg' | 'jpeg';
@@ -67,12 +69,44 @@ export class ProfileSummaryComponent  implements OnInit {
   }
 
   onFileSelect(event: Event): void {
-    // console.log('Selected');
     const file: File = (event.target as HTMLInputElement).files[0];
     if (!file) return;
 
     const formData = new FormData();
     formData.append('file', file);
+
+    from(file.arrayBuffer())
+      .pipe(
+        switchMap((buffer: Buffer) => {
+          return from(fromBuffer(buffer)).pipe(
+            switchMap((fileTypeResult: FileTypeResult) => {
+              if (!fileTypeResult) {
+                // TODO: error handling
+                console.log({ error: 'file format not supported!' });
+                return of();
+              }
+              const { ext, mime } = fileTypeResult;
+              const isFileTypeLegit = this.validFileExtensions.includes(
+                ext as any
+              );
+              const isMimeTypeLegit = this.validMimeTypes.includes(mime as any);
+              const isFileLegit = isFileTypeLegit && isMimeTypeLegit;
+              if (!isFileLegit) {
+                // TODO: error handling
+                console.log({
+                  error: 'file format does not match file extension!',
+                });
+                return of();
+              }
+              return this.authService.uploadUserImage(formData);
+            })
+          );
+        })
+      )
+      .subscribe();
+
+    this.form.reset();
   }
 
+  
 }

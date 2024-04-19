@@ -1,4 +1,9 @@
 {
+  "browser": {
+    "fs": false,
+    "path": false,
+    "os": false
+  },
   "name": "linkedin",
   "version": "0.0.1",
   "author": "Ionic Framework",
