@@ -3,7 +3,7 @@ import { UserService } from '../services/user.service';
 import { JwtGuard } from '../guards/jwt.guard';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { isFileExtensionSafe, removeFile, saveImageToStorage } from '../helpers/image-storage';
-import { Observable, of, switchMap } from 'rxjs';
+import { Observable, map, of, switchMap } from 'rxjs';
 import { join } from 'path';
 import { UpdateResult } from 'typeorm';
 
@@ -14,7 +14,7 @@ export class UserController {
     @UseGuards(JwtGuard)
     @Post('upload')
     @UseInterceptors(FileInterceptor('file', saveImageToStorage))
-    uploadImage(@UploadedFile() file: Express.Multer.File, @Request() req): Observable<UpdateResult | { error: string }> {
+    uploadImage(@UploadedFile() file: Express.Multer.File, @Request() req): Observable<{ modifiedFileName: string } | { error: string }> {
         const fileName = file?.filename;
 
         if (!fileName) return of({error: "File must be a png, jpg/jpeg"});
@@ -26,7 +26,11 @@ export class UserController {
             switchMap((isFileLegit: boolean) => {
                 if (isFileLegit) {
                     const userId = req.user.id;
-                    return this.userService.updateUserImageById(userId, fileName);
+                    return this.userService.updateUserImageById(userId, fileName).pipe(
+                        switchMap(() => of({
+                            modifiedFileName: file.filename,
+                        }))
+                    );
                 }
                 removeFile(fullImagePath);
             })
