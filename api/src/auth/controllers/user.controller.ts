@@ -27,7 +27,7 @@ export class UserController {
                 if (isFileLegit) {
                     const userId = req.user.id;
                     return this.userService.updateUserImageById(userId, fileName).pipe(
-                        switchMap(() => of({
+                        map(() => ({
                             modifiedFileName: file.filename,
                         }))
                     );
@@ -53,7 +53,7 @@ export class UserController {
 
     @UseGuards(JwtGuard)
     @Get('image-name')
-    findUserImageName(@Request() req, @Res() res): Observable<{ imageName: string }> {
+    findUserImageName(@Request() req): Observable<{ imageName: string }> {
         const userId = req.user.id;
         return this.userService.findImageNameByUserId(userId).pipe(
             switchMap((imageName: string) => {
