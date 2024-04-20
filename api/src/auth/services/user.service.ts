@@ -124,6 +124,14 @@ export class UserService {
     })
         )
     }
+
+    getFriendRequestsFromRecipients(
+        currentUser: User
+    ): Observable<FriendRequest[] | any> {
+        return from(this.friendRequestRepository.find({
+            where: [{ receiver: currentUser }]
+        }))
+    }
 }
 
 
