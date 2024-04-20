@@ -5,6 +5,7 @@ import { switchMap, take } from 'rxjs/operators';
 import { Role } from 'src/app/auth/models/user.model';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { FileTypeResult, fromBuffer } from 'file-type';
+import { BannerColorService } from '../../services/banner-color.service';
 
 
 type validFileExtension = 'png' | 'jpg' | 'jpeg';
@@ -34,13 +35,12 @@ export class ProfileSummaryComponent  implements OnInit, OnDestroy {
   fullName$ = new BehaviorSubject<string>(null);
   fullName = '';
 
-  bannerColors: BannerColors = {
-    colorOne: "#a8b4b7",
-    colorTwo: "#dbe7e9",
-    colorThree: "#dbe7e9",
-  }
+  
 
-  constructor(private authService: AuthService) { }
+  constructor(
+    private authService: AuthService,
+    public bannerColorService: BannerColorService
+  ) { }
 
   ngOnInit() {
 
@@ -49,7 +49,7 @@ export class ProfileSummaryComponent  implements OnInit, OnDestroy {
     })
 
     this.authService.userRole.pipe(take(1)).subscribe((role: Role) => {
-      this.bannerColors = this.getBannerColors(role);
+      this.bannerColorService.bannerColors = this.bannerColorService.getBannerColors(role);
     });
 
     this.authService.userFullName.pipe(take(1)).subscribe((fullName: string) => {
@@ -63,26 +63,7 @@ export class ProfileSummaryComponent  implements OnInit, OnDestroy {
     })
   }
 
-  private getBannerColors(role: Role): BannerColors {
-    switch(role) {
-      case 'admin':
-        return {
-          colorOne: "#a8b4b7",
-          colorTwo: "#dbe7e9",
-          colorThree: "#dbe7e9",
-        };
-
-        case 'user':
-        return {
-          colorOne: "#a8b4b7",
-          colorTwo: "#dbe7e9",
-          colorThree: "#dbe7e9",
-        };
-
-        default:
-          return this.bannerColors;
-    }
-  }
+ 
 
   onFileSelect(event: Event): void {
     const file: File = (event.target as HTMLInputElement).files[0];

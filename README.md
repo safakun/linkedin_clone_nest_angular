@@ -141,3 +141,9 @@ nest g s auth/services/user --flat --no-spec
 
 nest g co auth/controllers/user --flat --no-spec 
 ```
+
+```bash
+ionic g c home/components/connection-profile
+ionic g s home/services/connection-profile
+ionic g s home/services/banner-color
+```
