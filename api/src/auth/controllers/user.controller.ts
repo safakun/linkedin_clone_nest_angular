@@ -7,7 +7,7 @@ import { Observable, map, of, switchMap } from 'rxjs';
 import { join } from 'path';
 import { UpdateResult } from 'typeorm';
 import { User } from '../models/user.interface';
-import { FriendRequest } from '../models/friend-request.interface';
+import { FriendRequest, FriendRequestStatus } from '../models/friend-request.interface';
 
 @Controller('user')
 export class UserController {
@@ -78,6 +78,13 @@ export class UserController {
     sendFriendRequest(@Param('receiverId') receiverStringId: string, @Request() req): Observable<FriendRequest | { error: string }> {
         const receiverId = parseInt(receiverStringId);
         return this.userService.sendFriendRequest(receiverId, req.user);
+    }
+
+    @UseGuards(JwtGuard)
+    @Get('friend-request/status/:receiverId')
+    getFriendRequestStatus(@Param('receiverId') receiverStringId: string, @Request() req): Observable<FriendRequestStatus> {
+        const receiverId = parseInt(receiverStringId);
+        return this.userService.getFriendRequestStatus(receiverId, req.user);
     }
 
 

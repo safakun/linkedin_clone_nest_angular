@@ -5,7 +5,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { UserEntity } from '../models/user.entity';
 import { Repository, UpdateResult } from 'typeorm';
 import { map, switchMap } from 'rxjs/operators'
-import { FriendRequest } from '../models/friend-request.interface';
+import { FriendRequest, FriendRequestStatus, FriendRequest_Status } from '../models/friend-request.interface';
 import { FriendRequestEntity } from '../models/friend-request.entity';
 
 @Injectable()
@@ -82,6 +82,25 @@ export class UserService {
                             return from(this.friendRequestRepository.save(friendRequest));
                     })
                 )
+            })
+        )
+    }
+
+    getFriendRequestStatus(
+        receiverId: number,
+        currentUser: User
+    ): Observable<FriendRequestStatus> {
+        return this.findUserById(receiverId).pipe(
+            switchMap((receiver: User) => {
+                return from(this.friendRequestRepository.findOne({
+                    where: [
+                        {creator: currentUser},
+                        { receiver }
+                    ]
+                }))
+            }),
+            switchMap((friendRequest: FriendRequest | any) => {
+                return of({ status: friendRequest.status })
             })
         )
     }
