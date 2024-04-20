@@ -7,6 +7,7 @@ import { Observable, map, of, switchMap } from 'rxjs';
 import { join } from 'path';
 import { UpdateResult } from 'typeorm';
 import { User } from '../models/user.interface';
+import { FriendRequest } from '../models/friend-request.interface';
 
 @Controller('user')
 export class UserController {
@@ -66,8 +67,17 @@ export class UserController {
 
     @UseGuards(JwtGuard)
     @Get(':userId')
-    findUserById(@Param('userId') userId: number): Observable<User> {
+    findUserById(@Param('userId') userStringId: string): Observable<User> {
+        const userId = parseInt(userStringId);
         return this.userService.findUserById(userId);
+    }
+
+
+    @UseGuards(JwtGuard)
+    @Post('friend-request/send/:receiverId')
+    sendFriendRequest(@Param('receiverId') receiverStringId: string, @Request() req): Observable<FriendRequest | { error: string }> {
+        const receiverId = parseInt(receiverStringId);
+        return this.userService.sendFriendRequest(receiverId, req.user);
     }
 
 
