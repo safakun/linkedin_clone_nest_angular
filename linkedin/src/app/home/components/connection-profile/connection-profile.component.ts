@@ -67,6 +67,7 @@ export class ConnectionProfileComponent  implements OnInit, OnDestroy {
   getFriendRequestStatus(): Observable<FriendRequestStatus> {
     return this.getUserIdFromUrl().pipe(
       switchMap((userId: number) => {
+        console.log("OBTAINED STATUS: ", this.connectionProfileService.getFriendRequestStatus(userId))
         return this.connectionProfileService.getFriendRequestStatus(userId);
       })
     );

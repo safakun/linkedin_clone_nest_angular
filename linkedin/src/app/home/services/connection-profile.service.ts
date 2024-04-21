@@ -40,6 +40,17 @@ export class ConnectionProfileService {
     );
   }
 
+  // respondToFriendRequest(
+  //   id: number,
+  //   statusResponse: 'accepted' | 'declined'
+  // ): Observable<FriendRequest> {
+  //   return this.http.put<FriendRequest>(
+  //     `${environment.baseApiUrl}/user/friend-request/response/${id}`,
+  //     { status: statusResponse },
+  //     this.httpOptions
+  //   );
+  // }
+
   respondToFriendRequest(
     id: number,
     statusResponse: 'accepted' | 'declined'
