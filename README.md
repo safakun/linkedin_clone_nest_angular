@@ -146,4 +146,8 @@ nest g co auth/controllers/user --flat --no-spec
 ionic g c home/components/connection-profile
 ionic g s home/services/connection-profile
 ionic g s home/services/banner-color
-```
+
+ionic g c home/components/user-profile
+
+ionic g c home/components/header/friend-requests-popover
+``` 

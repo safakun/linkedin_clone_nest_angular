@@ -20,8 +20,13 @@
             <ion-icon name="home"></ion-icon>
             <div>Home</div>
           </ion-col>
-          <ion-col class="ion-hide-md-down" size="auto">
+          <ion-col
+          (click)="this.connectionProfileService?.friendRequests.length > 0 && presentFriendRequestPopover($event)"
+          class="ion-hide-md-down" size="auto">
             <ion-icon name="people"></ion-icon>
+            <ion-badge color="danger">
+              {{ this.connectionProfileService?.friendRequests?.length || 0 }}
+            </ion-badge>
             <div>My Network</div>
           </ion-col>
           <ion-col class="ion-hide-md-down" size="auto">

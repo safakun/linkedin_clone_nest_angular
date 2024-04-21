@@ -14,6 +14,8 @@ import { ModalComponent } from './components/start-post/modal/modal.component';
 import { AllPostsComponent } from './components/all-posts/all-posts.component';
 import { TabsComponent } from './components/tabs/tabs.component';
 import { ConnectionProfileComponent } from './components/connection-profile/connection-profile.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { FriendRequestsPopoverComponent } from './components/header/friend-requests-popover/friend-requests-popover.component';
 
 
 @NgModule({
@@ -23,6 +25,6 @@ import { ConnectionProfileComponent } from './components/connection-profile/conn
     IonicModule,
     HomePageRoutingModule,
   ],
-  declarations: [HomePage, HeaderComponent, PopoverComponent, ProfileSummaryComponent, StartPostComponent, AdvertisingComponent, ModalComponent, AllPostsComponent, TabsComponent, ConnectionProfileComponent]
+  declarations: [HomePage, HeaderComponent, PopoverComponent, ProfileSummaryComponent, StartPostComponent, AdvertisingComponent, ModalComponent, AllPostsComponent, TabsComponent, ConnectionProfileComponent, UserProfileComponent, FriendRequestsPopoverComponent]
 })
 export class HomePageModule {}
