@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from 'src/app/auth/models/user.model';
 import { environment } from 'src/environments/environment';
-import { FriendRequestStatus } from '../models/FriendRequest';
+import { FriendRequest, FriendRequestStatus } from '../models/FriendRequest';
 
 @Injectable({
   providedIn: 'root'
@@ -21,5 +21,11 @@ export class ConnectionProfileService {
 
   getFriendRequestStatus(id: number): Observable<FriendRequestStatus>  {
     return this.http.get<FriendRequestStatus>(`${environment.baseApiUrl}/user/friend-request/status/${id}`);
+  }
+
+  addConnectionUser(id: number): Observable<FriendRequest | { error: string }> {
+    return this.http.post<FriendRequest | { error: string }>(
+      `${environment.baseApiUrl}/user/friend-request/send/${id}`, {}, this.httpOptions
+    );
   }
 }

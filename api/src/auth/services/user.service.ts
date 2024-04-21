@@ -86,30 +86,57 @@ export class UserService {
         )
     }
 
+    // getFriendRequestStatus(
+    //     receiverId: number,
+    //     currentUser: User
+    // ): Observable<FriendRequestStatus> {
+    //     return this.findUserById(receiverId).pipe(
+    //         switchMap((receiver: User) => {
+    //             return from(this.friendRequestRepository.findOne({
+    //                 where: [
+    //                     {creator: currentUser,
+    //                      receiver: receiver },
+    //                      {creator: receiver,
+    //                         receiver: currentUser }
+    //                 ],
+    //                 relations: ['creator', 'receiver']
+    //             }))
+    //         }),
+    //         switchMap((friendRequest: FriendRequest | any) => {
+    //             if (friendRequest?.receiver.id === currentUser.id) {
+    //                 return of({ status: 'waiting-for-current-user-response' as FriendRequest_Status })
+    //             }
+    //             return of({ status: friendRequest?.status || 'not-sent' })
+    //         })
+    //     )
+    // }
+
     getFriendRequestStatus(
         receiverId: number,
-        currentUser: User
-    ): Observable<FriendRequestStatus> {
+        currentUser: User,
+      ): Observable<FriendRequestStatus> {
         return this.findUserById(receiverId).pipe(
-            switchMap((receiver: User) => {
-                return from(this.friendRequestRepository.findOne({
-                    where: [
-                        {creator: currentUser,
-                         receiver: receiver },
-                         {creator: receiver,
-                            receiver: currentUser }
-                    ],
-                    relations: ['creator', 'receiver']
-                }))
-            }),
-            switchMap((friendRequest: FriendRequest | any) => {
-                if (friendRequest?.receiver.id === currentUser.id) {
-                    return of({ status: 'waiting-for-current-user-response' as FriendRequest_Status })
-                }
-                return of({ status: friendRequest?.status || 'not-sent' })
-            })
-        )
-    }
+          switchMap((receiver: User) => {
+            return from(
+              this.friendRequestRepository.findOne({
+                where: [
+                  { creator: currentUser, receiver: receiver },
+                  { creator: receiver, receiver: currentUser },
+                ],
+                relations: ['creator', 'receiver'],
+              }),
+            );
+          }),
+          switchMap((friendRequest: FriendRequest | any) => {
+            if (friendRequest?.receiver.id === currentUser.id) {
+              return of({
+                status: 'waiting-for-current-user-response' as FriendRequest_Status,
+              });
+            }
+            return of({ status: friendRequest?.status || 'not-sent' });
+          }),
+        );
+      }
 
     getFriendRequestUserById(friendRequestId: number): Observable<FriendRequest | any> {
         return from(this.friendRequestRepository.findOne({

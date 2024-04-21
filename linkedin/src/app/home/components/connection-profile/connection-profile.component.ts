@@ -50,6 +50,15 @@ export class ConnectionProfileComponent  implements OnInit, OnDestroy {
     )
   }
 
+  addUser(): Subscription {
+    this.friendRequestStatus = 'pending';
+    return this.getUserIdFromUrl().pipe(
+      switchMap((userId: number) => {
+        return this.connectionProfileService.addConnectionUser(userId);
+      })
+    ).pipe(take(1)).subscribe()
+  }
+
   getFriendRequestStatus(): Observable<FriendRequestStatus> {
     return this.getUserIdFromUrl().pipe(
       switchMap((userId: number) => {
