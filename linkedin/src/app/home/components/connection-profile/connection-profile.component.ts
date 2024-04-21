@@ -24,10 +24,11 @@ export class ConnectionProfileComponent  implements OnInit, OnDestroy {
   constructor(
     public bannerColorService: BannerColorService,
     private route: ActivatedRoute,
-    private connectionProfileService: ConnectionProfileService
+    public connectionProfileService: ConnectionProfileService
   ) { }
 
   ngOnInit() {
+
     this.friendRequestStatusSubscription$ = this.getFriendRequestStatus().pipe(
       tap((friendRequestStatus: FriendRequestStatus) => {
         this.friendRequestStatus = friendRequestStatus.status;
@@ -38,6 +39,7 @@ export class ConnectionProfileComponent  implements OnInit, OnDestroy {
         })
       })
     ).subscribe();
+
     this.getUser().subscribe((x) => console.log(x))
    // this.getUserIdFromUrl().subscribe((x) => console.log(33, x));
   }
@@ -45,18 +47,21 @@ export class ConnectionProfileComponent  implements OnInit, OnDestroy {
   getUser(): Observable<User> {
     return this.getUserIdFromUrl().pipe(
       switchMap((userId: number) => {
-        return this.connectionProfileService.getConnectionYser(userId)
+        return this.connectionProfileService.getConnectionYser(userId);
       })
-    )
+    );
   }
 
   addUser(): Subscription {
     this.friendRequestStatus = 'pending';
-    return this.getUserIdFromUrl().pipe(
-      switchMap((userId: number) => {
-        return this.connectionProfileService.addConnectionUser(userId);
-      })
-    ).pipe(take(1)).subscribe()
+    return this.getUserIdFromUrl()
+      .pipe(
+        switchMap((userId: number) => {
+          return this.connectionProfileService.addConnectionUser(userId);
+        })
+      )
+      .pipe(take(1))
+      .subscribe();
   }
 
   getFriendRequestStatus(): Observable<FriendRequestStatus> {
@@ -64,21 +69,22 @@ export class ConnectionProfileComponent  implements OnInit, OnDestroy {
       switchMap((userId: number) => {
         return this.connectionProfileService.getFriendRequestStatus(userId);
       })
-    )
+    );
   }
+
 
   ngOnDestroy(): void {
        this.userSubscription$.unsubscribe();
        this.friendRequestStatusSubscription$.unsubscribe();
   }
 
-   private getUserIdFromUrl(): Observable<number> {
+  private getUserIdFromUrl(): Observable<number> {
     return this.route.url.pipe(
       map((urlSegment: UrlSegment[]) => {
-        return Number(urlSegment[0].path);
+        return +urlSegment[0].path;
       })
-    )
-   }
+    );
+  }
 
   
   

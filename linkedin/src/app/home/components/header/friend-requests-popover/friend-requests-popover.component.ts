@@ -37,4 +37,30 @@ export class FriendRequestsPopoverComponent  implements OnInit {
     
   }
 
+  async respondToFriendRequest(
+    id: number,
+    statusResponse: 'accepted' | 'declined'
+  ) {
+    const handledFriendRequest: FriendRequest =
+      this.connectionProfileService.friendRequests.find(
+        (friendRequest) => friendRequest.id === id
+      );
+
+    const unhandledFriendRequests: FriendRequest[] =
+      this.connectionProfileService.friendRequests.filter(
+        (friendRequest) => friendRequest.id !== handledFriendRequest.id
+      );
+
+    this.connectionProfileService.friendRequests = unhandledFriendRequests;
+
+    if (this.connectionProfileService?.friendRequests.length === 0) {
+      await this.popoverController.dismiss();
+    }
+
+    return this.connectionProfileService
+      .respondToFriendRequest(id, statusResponse)
+      .pipe(take(1))
+      .subscribe();
+  }
+
 }

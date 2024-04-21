@@ -24,8 +24,10 @@
           (click)="this.connectionProfileService?.friendRequests.length > 0 && presentFriendRequestPopover($event)"
           class="ion-hide-md-down" size="auto">
             <ion-icon name="people"></ion-icon>
-            <ion-badge color="danger">
-              {{ this.connectionProfileService?.friendRequests?.length || 0 }}
+            <ion-badge 
+            *ngIf="this.connectionProfileService?.friendRequests?.length"
+            color="danger">
+              {{ this.connectionProfileService?.friendRequests?.length || '' }}
             </ion-badge>
             <div>My Network</div>
           </ion-col>
