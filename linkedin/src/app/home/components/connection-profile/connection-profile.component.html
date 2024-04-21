@@ -28,10 +28,10 @@
       <ion-avatar
         class="ion-margin-auto"
       >
-        <!-- <ion-img *ngIf="userFullImagePath" [src]="userFullImagePath"></ion-img> -->
+        <ion-img *ngIf="user" [src]="$any(user).fullImagePath"></ion-img>
       </ion-avatar>
   
-      <ion-card-title class="ion-margin-top"> Safakun Safa </ion-card-title>
+      <ion-card-title *ngIf="user" class="ion-margin-top"> {{ user.firstName }} {{ user.lastName }} </ion-card-title>
       <!-- <ion-card-title class="ion-margin-top"> {{ fullName }} </ion-card-title> -->
       <ion-card-subtitle>Full Stack Developer</ion-card-subtitle>
     </ion-card-header>
