@@ -174,4 +174,10 @@ ncu -u
 npm i @capacitor/storage
 npm i @capacitor/splash-screen
 
+``` 
+
+- On backend
+```bash
+npm i morgan
+npm i class-validator class-transformer
 ```

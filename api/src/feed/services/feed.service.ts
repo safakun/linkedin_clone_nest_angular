@@ -4,7 +4,7 @@ import { FeedPostEntity } from '../models/post.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { FeedPost } from '../models/post.interface';
 import { Observable, from } from 'rxjs';
-import { User } from 'src/auth/models/user.interface';
+import { User } from 'src/auth/models/user.class';
 
 @Injectable()
 export class FeedService {

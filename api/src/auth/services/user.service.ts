@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Observable, from, of } from 'rxjs';
-import { User } from '../models/user.interface';
+import { User } from '../models/user.class';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserEntity } from '../models/user.entity';
 import { Repository, UpdateResult } from 'typeorm';

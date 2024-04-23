@@ -6,7 +6,7 @@ import { isFileExtensionSafe, removeFile, saveImageToStorage } from '../helpers/
 import { Observable, map, of, switchMap } from 'rxjs';
 import { join } from 'path';
 import { UpdateResult } from 'typeorm';
-import { User } from '../models/user.interface';
+import { User } from '../models/user.class';
 import { FriendRequest, FriendRequestStatus } from '../models/friend-request.interface';
 
 @Controller('user')
