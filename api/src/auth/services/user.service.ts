@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { Observable, from, of } from 'rxjs';
 import { User } from '../models/user.class';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -26,6 +26,9 @@ export class UserService {
             })
         ).pipe(
             map((user: User | any) => {
+              if (!user) {
+                throw new HttpException('User not found!', HttpStatus.NOT_FOUND);
+              }
                 delete user.password;
                 return user;
             })
