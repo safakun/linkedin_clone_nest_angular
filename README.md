@@ -151,3 +151,27 @@ ionic g c home/components/user-profile
 
 ionic g c home/components/header/friend-requests-popover
 ``` 
+
+
+### How to upgrade Nest, Ionic and Angular 
+
+```bash
+npm install -g npm-check-updates 
+
+npm install -g @nestjs/cli 
+
+npm outdated
+
+nest update -t -t latest 
+# To upgrade all packages to latest:
+ncu -u 
+
+# On client
+npm i -g @ionic/cli 
+npm i -g @angular/cli 
+ncu -u
+
+npm i @capacitor/storage
+npm i @capacitor/splash-screen
+
+```

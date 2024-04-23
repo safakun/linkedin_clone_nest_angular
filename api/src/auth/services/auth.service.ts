@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 import { from, Observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
@@ -47,14 +47,23 @@ export class AuthService {
             select: ['id', 'firstName', 'lastName', 'email', 'password', 'role']
          })).pipe(
             switchMap((user: User | any) => 
-            from(bcrypt.compare(password, user.password)).pipe(
-                map((isValidPassword: boolean) => {
-                    if (isValidPassword) {
-                        delete user.password;
-                        return user;
-                    }
-                })
-            )
+                {
+            if (!user) {
+                // throw new HttpException('Not found', HttpStatus.NOT_FOUND)
+
+                throw new HttpException({ status: HttpStatus.NOT_FOUND, error: 'Inмalid credentials' }, HttpStatus.NOT_FOUND);
+            }
+               
+    return from(bcrypt.compare(password, user.password)).pipe(
+        map((isValidPassword: boolean) => {
+            if (isValidPassword) {
+                delete user.password;
+                return user;
+            }
+        })
+    )
+}
+             
             )
         )
     }
