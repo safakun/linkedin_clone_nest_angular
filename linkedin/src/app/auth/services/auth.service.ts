@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { NewUser } from '../models/newUser.model';
 import { BehaviorSubject, from, Observable, of } from 'rxjs';
-import {switchMap, take, tap, map} from 'rxjs/operators';
+import {switchMap, take, tap, map, catchError} from 'rxjs/operators';
 import { Role, User } from '../models/user.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -10,11 +10,13 @@ import { Preferences } from '@capacitor/preferences';
 import { UserResponse } from '../models/userResponse.model';
 
 import { jwtDecode } from 'jwt-decode';
+import { ErrorHandlerService } from 'src/app/core/error-handler.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+
 
   private user$ = new BehaviorSubject<User | null>(null);
 
@@ -77,7 +79,11 @@ export class AuthService {
     )
   }
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(
+    private http: HttpClient, 
+    private router: Router,
+    private errorHandlerService: ErrorHandlerService
+  ) { }
 
   getDefaultFullImagePath(): string {
     return environment.baseApiUrl + '/feed/image/blank-profile-picture.png';
@@ -130,13 +136,24 @@ export class AuthService {
     ).pipe(
       take(1),
       tap((response: {token: string}) => {
+         // If not token from user
+         if (!response.token) {
+          throw new Error("Login failed. Wrong credentials")
+        }
         Preferences.set({
           key: 'token',
           value: response.token,
         });
+
+       
+
         const decodedToken: UserResponse = jwtDecode(response.token);
         this.user$.next(decodedToken.user);
-      })
+      }),
+    
+      catchError(
+        this.errorHandlerService.handleError<string | any>('token', '')
+      ),
       );
   }
 
