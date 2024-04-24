@@ -180,4 +180,14 @@ npm i @capacitor/splash-screen
 ```bash
 npm i morgan
 npm i class-validator class-transformer
+``` 
+
+### Testing Nest backend
+
+```bash
+npm i -D node-mocks-http 
+
+npm run test
+
+npm run test feed.controller
 ```

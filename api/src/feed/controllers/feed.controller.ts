@@ -3,10 +3,10 @@ import { FeedService } from '../services/feed.service';
 import { FeedPost } from '../models/post.interface';
 import { Observable, of } from 'rxjs';
 import { DeleteResult, UpdateResult } from 'typeorm';
-import { JwtGuard } from 'src/auth/guards/jwt.guard';
-import { Roles } from 'src/auth/decorators/roles.decorator';
-import { Role } from 'src/auth/models/role.enum';
-import { RolesGuard } from 'src/auth/guards/roles.guard';
+import { JwtGuard } from '../../auth/guards/jwt.guard';
+import { Roles } from '../../auth/decorators/roles.decorator';
+import { Role } from '../../auth/models/role.enum';
+import { RolesGuard } from '../../auth/guards/roles.guard';
 import { IsCreatorGuard } from '../guards/is-creator.guard';
 
 
