@@ -191,4 +191,6 @@ npm run test
 
 npm run test feed.controller
 npm run test feed.service
+
+npm run test:e2e
 ```

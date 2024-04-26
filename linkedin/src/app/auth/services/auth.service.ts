@@ -10,7 +10,7 @@ import { Preferences } from '@capacitor/preferences';
 import { UserResponse } from '../models/userResponse.model';
 
 import { jwtDecode } from 'jwt-decode';
-import { ErrorHandlerService } from 'src/app/core/error-handler.service';
+import { ErrorHandlerService } from '../../../app/core/error-handler.service';
 
 @Injectable({
   providedIn: 'root'
