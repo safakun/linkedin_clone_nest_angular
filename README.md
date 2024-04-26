@@ -190,4 +190,5 @@ npm i -D node-mocks-http
 npm run test
 
 npm run test feed.controller
+npm run test feed.service
 ```
