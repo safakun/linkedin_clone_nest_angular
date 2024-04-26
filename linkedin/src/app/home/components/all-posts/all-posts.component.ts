@@ -3,9 +3,9 @@ import { PostService } from '../../services/post.service';
 import { IonInfiniteScroll, ModalController } from '@ionic/angular';
 import { Post } from '../../models/Post';
 import { BehaviorSubject, Subscription, take } from 'rxjs';
-import { AuthService } from 'src/app/auth/services/auth.service';
+import { AuthService } from '../../../../app/auth/services/auth.service';
 import { ModalComponent } from '../start-post/modal/modal.component';
-import { User } from 'src/app/auth/models/user.model';
+import { User } from '../../../../app/auth/models/user.model';
 
 @Component({
   selector: 'app-all-posts',

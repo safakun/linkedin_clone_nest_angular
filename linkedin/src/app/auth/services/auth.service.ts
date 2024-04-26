@@ -5,7 +5,7 @@ import {switchMap, take, tap, map, catchError} from 'rxjs/operators';
 import { Role, User } from '../models/user.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { environment } from 'src/environments/environment';
+import { environment } from '../../../environments/environment';
 import { Preferences } from '@capacitor/preferences';
 import { UserResponse } from '../models/userResponse.model';
 

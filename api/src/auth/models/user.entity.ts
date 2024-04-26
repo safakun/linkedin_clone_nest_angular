@@ -1,6 +1,6 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Role } from "./role.enum";
-import { FeedPostEntity } from "src/feed/models/post.entity";
+import { FeedPostEntity } from "../../feed/models/post.entity";
 import { FriendRequestEntity } from "./friend-request.entity";
 
 
