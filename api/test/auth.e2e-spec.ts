@@ -41,7 +41,7 @@ describe('AuthController (e2e)', () => {
         .post('/register')
         .set('Accept', 'application/json')
         .send(mockUser)
-        .expect(HttpStatus.INTERNAL_SERVER_ERROR);
+        .expect(HttpStatus.BAD_REQUEST);
     });
   });
 
@@ -67,9 +67,9 @@ describe('AuthController (e2e)', () => {
         .expect((response: request.Response) => {
           const { token }: { token: string } = response.body;
 
-          expect(jwt.verify(token, 'jwtsecret')).toBeTruthy();
+          expect(jwt.verify(token, 'jwtSecret_phrase')).toBeTruthy();
         })
-        .expect(HttpStatus.OK);
+        .expect(HttpStatus.CREATED);
     });
   });
 });
