@@ -69,7 +69,7 @@ describe('AuthController (e2e)', () => {
 
           expect(jwt.verify(token, 'jwtSecret_phrase')).toBeTruthy();
         })
-        .expect(HttpStatus.CREATED);
+        .expect(HttpStatus.OK);
     });
   });
 });
