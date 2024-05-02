@@ -174,6 +174,31 @@ export class UserService {
             relations: ['receiver', 'creator']
         }))
     }
+
+    getFriends(currentUser: User): Observable<User[] | any> {
+      return from(this.friendRequestRepository.find({
+        where: [
+          { creator: currentUser, status: 'accepted' },
+          { receiver: currentUser, status: 'accepted' },
+        ],
+        relations: ['creator', 'receiver']
+      })).pipe(
+        switchMap((friends: FriendRequest[] | any) => {
+          let userIds: number[] = [];
+
+          friends.forEach((friend: FriendRequest) => {
+
+            if(friend.creator.id === currentUser.id) {
+              userIds.push(friend.receiver.id);
+            } else if (friend.receiver.id === currentUser.id) {
+              userIds.push(friend.creator.id);
+            }
+          })
+
+          return from(this.userRepository.findByIds(userIds));
+        })
+      )
+    }
 }
 
 
