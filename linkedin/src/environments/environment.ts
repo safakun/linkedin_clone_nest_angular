@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   baseApiUrl: 'http://localhost:3000/api',
+  baseApiUrlForSocket: 'http://localhost:3000',
   // fakeStoreApiUrl: 'https://fakestoreapi.com'
 };
 

@@ -16,6 +16,7 @@ import { TabsComponent } from './components/tabs/tabs.component';
 import { ConnectionProfileComponent } from './components/connection-profile/connection-profile.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { FriendRequestsPopoverComponent } from './components/header/friend-requests-popover/friend-requests-popover.component';
+import { ChatComponent } from './components/chat/chat.component';
 
 
 @NgModule({
@@ -25,6 +26,6 @@ import { FriendRequestsPopoverComponent } from './components/header/friend-reque
     IonicModule,
     HomePageRoutingModule,
   ],
-  declarations: [HomePage, HeaderComponent, PopoverComponent, ProfileSummaryComponent, StartPostComponent, AdvertisingComponent, ModalComponent, AllPostsComponent, TabsComponent, ConnectionProfileComponent, UserProfileComponent, FriendRequestsPopoverComponent]
+  declarations: [HomePage, HeaderComponent, PopoverComponent, ProfileSummaryComponent, StartPostComponent, AdvertisingComponent, ModalComponent, AllPostsComponent, TabsComponent, ConnectionProfileComponent, UserProfileComponent, FriendRequestsPopoverComponent, ChatComponent]
 })
 export class HomePageModule {}

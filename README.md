@@ -194,3 +194,26 @@ npm run test feed.service
 
 npm run test:e2e
 ```
+
+- Nest websockets
+https://docs.nestjs.com/websockets/gateways
+```bash
+npm i --save @nestjs/websockets @nestjs/platform-socket.io
+
+nest g mo chat
+```
+
+- create gateway for chat 
+```bash
+nest g ga chat/gateway/chat --no-spec 
+``` 
+
+- on client
+```bash
+npm i ngx-socket-io
+
+ionic g c home/components/chat 
+
+ionic g s home/services/chat
+
+```
