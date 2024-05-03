@@ -11,7 +11,7 @@
         </ion-col>
         <ion-col>
           <div class="full-name" [routerLink]="['/', 'home', post.author.id]">{{ post.author.firstName }} {{ post.author.lastName }}</div>
-          <div class="role">Full stack developer</div>
+          <div class="role">{{ post.author.position ? post.author.position : '---'  }}</div>
           <div class="meta-data">
             1d<ion-icon name="ellipse"></ion-icon> edited
             <ion-icon name="ellipse"></ion-icon>

@@ -29,10 +29,10 @@ export class AuthPage implements OnInit {
         this.router.navigateByUrl('/home');
       });
     } else if (this.submissionType === 'join') {
-      const { firstName, lastName } = this.form.value;
-      if (!firstName || !lastName) return;
+      const { firstName, lastName, position } = this.form.value;
+      if (!firstName || !lastName || !position) return;
 
-      const newUser: NewUser = { firstName, lastName, email, password };
+      const newUser: NewUser = { firstName, lastName, position, email, password };
 
       return this.authService.register(newUser).subscribe(() => {
         this.toggleText();

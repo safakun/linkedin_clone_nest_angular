@@ -12,5 +12,6 @@ export class User {
     password?: string;
     imagePath?: string;
     role?: Role;
+    position?: string;
     posts: FeedPost[];
 }

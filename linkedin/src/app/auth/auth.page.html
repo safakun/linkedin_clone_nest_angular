@@ -45,6 +45,25 @@
           >Please enter your last name.</ion-text
         >
       </ng-container>
+
+      <ng-container *ngIf="submissionType === 'join'">
+        <ion-item>
+          <ion-label position="floating">Your Job title</ion-label>
+          <ion-input
+            #positionInput="ngModel"
+            ngModel
+            type="text"
+            name="position"
+            required
+          ></ion-input>
+        </ion-item>
+        <ion-text
+          color="danger"
+          *ngIf="!positionInput.valid && positionInput.touched"
+          >Please enter your job position in a company.</ion-text
+        >
+      </ng-container>
+
       <ion-item>
         <ion-label position="floating">Email</ion-label>
         <ion-input

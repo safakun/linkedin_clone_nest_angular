@@ -27,6 +27,9 @@ export class UserEntity {
     @Column({ type: 'enum', enum: Role, default: Role.USER})
     role: Role;
 
+    @Column({ nullable: true })
+    position: string;
+
     @OneToMany(() => FeedPostEntity, (feedPostEntity) => feedPostEntity.author)
     feedPosts: FeedPostEntity[];
 

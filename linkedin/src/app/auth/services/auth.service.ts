@@ -64,6 +64,15 @@ export class AuthService {
     );
   }
 
+  get userPosition(): Observable<string> {
+    return this.user$.asObservable().pipe(
+      switchMap((user: User | any) => {
+        const position = user.position;
+        return of(position);
+      })
+    );
+  }
+
   get userFullImagePath(): Observable<string> {
     return this.user$.asObservable().pipe(
       switchMap((user: User) => {
