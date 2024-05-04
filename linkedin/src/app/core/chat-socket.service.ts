@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 
 import { SocketIoConfig, Socket } from 'ngx-socket-io';
+import { environment } from 'src/environments/environment';
 
 const config: SocketIoConfig = {
-  url: 'http://localhost:3000',
+  url: `${environment.baseApiUrlForSocket}`,
   options: {
     transportOptions: {
       polling: {

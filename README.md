@@ -217,3 +217,8 @@ ionic g c home/components/chat
 ionic g s home/services/chat
 
 ```
+
+```bash
+nest g s chat/services/conversation --no-spec --flat 
+
+```

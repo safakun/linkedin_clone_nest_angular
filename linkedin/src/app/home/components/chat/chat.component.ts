@@ -8,6 +8,7 @@ import { AuthService } from 'src/app/auth/services/auth.service';
 import { Conversation } from '../../models/Conversation';
 import { Message } from '../../models/Message';
 import { ChatService } from '../../services/chat.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-chat',
@@ -47,6 +48,7 @@ export class ChatComponent {
   ) {}
 
   ionViewDidEnter() {
+    console.log('DID ENTER');
     console.log(
       123,
       this.selectedConversationIndex,
@@ -153,7 +155,7 @@ export class ChatComponent {
   }
 
   deriveFullImagePath(user: User): string {
-    let url = 'http://localhost:3000/api/feed/image/';
+    let url = `${environment.baseApiUrl}/feed/image/`;
 
     if (user.id === this.userId) {
       return this.userFullImagePath;
@@ -167,6 +169,7 @@ export class ChatComponent {
   }
 
   ionViewDidLeave() {
+    console.log('THE SOCKET LEAVED');
     this.chatService.leaveConversation();
 
     this.selectedConversationIndex = 0;
