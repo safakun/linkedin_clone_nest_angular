@@ -46,7 +46,7 @@
             <ion-card-title
               >{{ friend.firstName }} {{ friend.lastName }}
             </ion-card-title>
-            <ion-card-subtitle>Full Stack Developer</ion-card-subtitle>
+            <ion-card-subtitle>{{ friend.position }}</ion-card-subtitle>
           </ion-col>
         </ion-row>
       </ion-grid>
@@ -59,7 +59,7 @@
           >{{ friend?.firstName || "Loading..." }}
           {{ friend?.lastName }}</ion-text
         >
-        <ion-text>Full Stack Developer</ion-text>
+        <ion-text>{{ friend?.position }}</ion-text>
       </div>
       <div>
         <ion-button

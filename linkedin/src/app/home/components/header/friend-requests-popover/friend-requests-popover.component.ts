@@ -25,7 +25,7 @@ export class FriendRequestsPopoverComponent  implements OnInit {
       (friendRequest: FriendRequest) => {
         const creatorId = (friendRequest as any)?.creator?.id;
         if (friendRequest && creatorId) {
-          this.connectionProfileService.getConnectionYser(creatorId).pipe(
+          this.connectionProfileService.getConnectionUser(creatorId).pipe(
             take(1),
             tap((user: User) => {
               friendRequest['fullImagePath'] = `${environment.baseApiUrl}/feed/image/${(user?.imagePath || 'blank-profile-picture.png')}`;
